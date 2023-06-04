@@ -97,6 +97,25 @@ class Reviewer(Mentor):
     def __str__(self):
         res = f'Имя: {self.name}\nФЙамилия: {self.surname}'
         return res
+    
+
+def average_grade_all_studenst(courses):
+        sum_total = 0
+        for course in courses:
+            if course[0] in first_student.courses_in_progress:
+                sum_total += first_student.average_rating
+            if course[0] in second_student.courses_in_progress:
+                sum_total += second_student.average_rating
+        print(f'Средняя оценка за все домашние задания у студентов: {sum_total}\n')
+
+def average_grade_all_lecturers(courses):
+        sum_total = 0
+        for course in courses:
+            if course[0] in first_lecturer.courses_attached:
+                sum_total += first_lecturer.average_rating
+            if course[0] in second_lecturer.courses_attached:
+                sum_total += second_lecturer.average_rating
+        print(f'Средняя оценка за все лекции составляет: {sum_total}')
 
 
 if __name__ == "__main__":
@@ -151,15 +170,6 @@ if __name__ == "__main__":
         ['Python', [first_student.name, first_student.surname]]
     ]
 
-    def average_grade_all_studenst(courses):
-        sum_total = 0
-        for course in courses:
-            if course[0] in first_student.courses_in_progress:
-                sum_total += first_student.average_rating
-            if course[0] in second_student.courses_in_progress:
-                sum_total += second_student.average_rating
-        print(f'Средняя оценка за все домашние задания у студентов: {sum_total}\n')
-
     all_students = average_grade_all_studenst(student_courses)
 
     print(f'Лекторы:\n\n{first_lecturer}\n\n{second_lecturer}\n')
@@ -177,14 +187,5 @@ if __name__ == "__main__":
         ['Go', 'C++', [second_lecturer.name, second_lecturer.surname]],
         ['Python', 'Git', [first_lecturer.name, first_lecturer.surname]]
     ]
-
-    def average_grade_all_lecturers(courses):
-        sum_total = 0
-        for course in courses:
-            if course[0] in first_lecturer.courses_attached:
-                sum_total += first_lecturer.average_rating
-            if course[0] in second_lecturer.courses_attached:
-                sum_total += second_lecturer.average_rating
-        print(f'Средняя оценка за все лекции составляет: {sum_total}')
 
     all_lecturers = average_grade_all_lecturers(lecturer_courses)

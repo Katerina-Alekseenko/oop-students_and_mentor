@@ -98,90 +98,93 @@ class Reviewer(Mentor):
         res = f'Имя: {self.name}\nФЙамилия: {self.surname}'
         return res
 
-first_student = Student('Olga', 'Ivanova')
-first_student.finished_courses += ['Go']
-first_student.courses_in_progress += ['Python']
 
-second_student = Student('Petr', 'Smirnov')
-second_student.finished_courses += ['C++']
-second_student.courses_in_progress += ['Go']
+if __name__ == "__main__":
 
-first_lecturer = Lecturer('Irina', 'Sidorova')
-first_lecturer.courses_attached += ['Python', 'Git']
+    first_student = Student('Olga', 'Ivanova')
+    first_student.finished_courses += ['Go']
+    first_student.courses_in_progress += ['Python']
 
-second_lecturer = Lecturer('Ivan', 'Sidorov')
-second_lecturer.courses_attached += ['Go', 'C++']
+    second_student = Student('Petr', 'Smirnov')
+    second_student.finished_courses += ['C++']
+    second_student.courses_in_progress += ['Go']
 
-first_reviewer = Reviewer('Dmitriy', 'Popov')
-first_reviewer.courses_attached += ['Go', 'C++']
+    first_lecturer = Lecturer('Irina', 'Sidorova')
+    first_lecturer.courses_attached += ['Python', 'Git']
 
-second_reviewer = Reviewer('Denis', 'Petrov')
-second_reviewer.courses_attached += ['Python']
+    second_lecturer = Lecturer('Ivan', 'Sidorov')
+    second_lecturer.courses_attached += ['Go', 'C++']
 
-first_student.rate_lecture(first_lecturer, 'Python', 8)
-first_student.rate_lecture(first_lecturer, 'Python', 9)
-first_student.rate_lecture(first_lecturer, 'Python', 10)
+    first_reviewer = Reviewer('Dmitriy', 'Popov')
+    first_reviewer.courses_attached += ['Go', 'C++']
 
-second_student.rate_lecture(second_lecturer, 'Go', 6)
-second_student.rate_lecture(second_lecturer, 'Go', 8)
-second_student.rate_lecture(second_lecturer, 'Go', 10)
+    second_reviewer = Reviewer('Denis', 'Petrov')
+    second_reviewer.courses_attached += ['Python']
 
-first_reviewer.rate_hw(second_student, 'Go', 6)
-first_reviewer.rate_hw(second_student, 'Go', 8)
-first_reviewer.rate_hw(second_student, 'Go', 10)
+    first_student.rate_lecture(first_lecturer, 'Python', 8)
+    first_student.rate_lecture(first_lecturer, 'Python', 9)
+    first_student.rate_lecture(first_lecturer, 'Python', 10)
 
-second_reviewer.rate_hw(first_student, 'Python', 4)
-second_reviewer.rate_hw(first_student, 'Python', 5)
-second_reviewer.rate_hw(first_student, 'Python', 9)
+    second_student.rate_lecture(second_lecturer, 'Go', 6)
+    second_student.rate_lecture(second_lecturer, 'Go', 8)
+    second_student.rate_lecture(second_lecturer, 'Go', 10)
 
-print(f'Студенты:\n\n{first_student}\n\n{second_student}\n')
+    first_reviewer.rate_hw(second_student, 'Go', 6)
+    first_reviewer.rate_hw(second_student, 'Go', 8)
+    first_reviewer.rate_hw(second_student, 'Go', 10)
 
-if {first_student > second_student} == True:
-    print(f'Средняя оценка за д/з у {first_student.name} {first_student.surname}' \
-          f' больше чем у {second_student.name} {second_student.surname}\n')
-else:
-    print(f'Средняя оценка за д/з у {first_student.name} {first_student.surname}' \
-          f' меньше чем у {second_student.name} {second_student.surname}\n')
+    second_reviewer.rate_hw(first_student, 'Python', 4)
+    second_reviewer.rate_hw(first_student, 'Python', 5)
+    second_reviewer.rate_hw(first_student, 'Python', 9)
 
-student_courses = [
-    ['Go', [second_student.name, second_student.surname]],
-    ['Python', [first_student.name, first_student.surname]]
-]
+    print(f'Студенты:\n\n{first_student}\n\n{second_student}\n')
 
-def average_grade_all_studenst(courses):
-    sum_total = 0
-    for course in courses:
-        if course[0] in first_student.courses_in_progress:
-            sum_total += first_student.average_rating
-        if course[0] in second_student.courses_in_progress:
-            sum_total += second_student.average_rating
-    print(f'Средняя оценка за все домашние задания у студентов: {sum_total}\n')
+    if {first_student > second_student} == True:
+        print(f'Средняя оценка за д/з у {first_student.name} {first_student.surname}' \
+            f' больше чем у {second_student.name} {second_student.surname}\n')
+    else:
+        print(f'Средняя оценка за д/з у {first_student.name} {first_student.surname}' \
+            f' меньше чем у {second_student.name} {second_student.surname}\n')
 
-all_students = average_grade_all_studenst(student_courses)
+    student_courses = [
+        ['Go', [second_student.name, second_student.surname]],
+        ['Python', [first_student.name, first_student.surname]]
+    ]
 
-print(f'Лекторы:\n\n{first_lecturer}\n\n{second_lecturer}\n')
+    def average_grade_all_studenst(courses):
+        sum_total = 0
+        for course in courses:
+            if course[0] in first_student.courses_in_progress:
+                sum_total += first_student.average_rating
+            if course[0] in second_student.courses_in_progress:
+                sum_total += second_student.average_rating
+        print(f'Средняя оценка за все домашние задания у студентов: {sum_total}\n')
 
-if {first_lecturer > second_lecturer} == True:
-    print('Средняя оценка за лекции у' \
-          f'{first_lecturer.name} {first_lecturer.surname}' \
-          f' больше чем у {second_lecturer.name} {second_lecturer.surname}\n')
-else:
-    print('Средняя оценка за лекции у' \
-          f' {first_lecturer.name} {first_lecturer.surname}' \
-          f' меньше чем у {second_lecturer.name} {second_lecturer.surname}\n')
+    all_students = average_grade_all_studenst(student_courses)
 
-lecturer_courses = [
-    ['Go', 'C++', [second_lecturer.name, second_lecturer.surname]],
-    ['Python', 'Git', [first_lecturer.name, first_lecturer.surname]]
-]
+    print(f'Лекторы:\n\n{first_lecturer}\n\n{second_lecturer}\n')
 
-def average_grade_all_lecturers(courses):
-    sum_total = 0
-    for course in courses:
-        if course[0] in first_lecturer.courses_attached:
-            sum_total += first_lecturer.average_rating
-        if course[0] in second_lecturer.courses_attached:
-            sum_total += second_lecturer.average_rating
-    print(f'Средняя оценка за все лекции составляет: {sum_total}')
+    if {first_lecturer > second_lecturer} == True:
+        print('Средняя оценка за лекции у' \
+            f'{first_lecturer.name} {first_lecturer.surname}' \
+            f' больше чем у {second_lecturer.name} {second_lecturer.surname}\n')
+    else:
+        print('Средняя оценка за лекции у' \
+            f' {first_lecturer.name} {first_lecturer.surname}' \
+            f' меньше чем у {second_lecturer.name} {second_lecturer.surname}\n')
 
-all_lecturers = average_grade_all_lecturers(lecturer_courses)
+    lecturer_courses = [
+        ['Go', 'C++', [second_lecturer.name, second_lecturer.surname]],
+        ['Python', 'Git', [first_lecturer.name, first_lecturer.surname]]
+    ]
+
+    def average_grade_all_lecturers(courses):
+        sum_total = 0
+        for course in courses:
+            if course[0] in first_lecturer.courses_attached:
+                sum_total += first_lecturer.average_rating
+            if course[0] in second_lecturer.courses_attached:
+                sum_total += second_lecturer.average_rating
+        print(f'Средняя оценка за все лекции составляет: {sum_total}')
+
+    all_lecturers = average_grade_all_lecturers(lecturer_courses)

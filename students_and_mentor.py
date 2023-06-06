@@ -26,6 +26,11 @@ class Student:
         for course in self.grades:
             sum_grades += len(self.grades[course])
 
+        try:
+            self.average_rating = sum(map(sum, self.grades.values())) / sum_grades
+        except ZeroDivisionError:
+            print(f'У {self.name}{self.surname} пока нет оценок')
+
         self.average_rating = sum(map(sum, self.grades.values())) / sum_grades
 
         res = f'Имя: {self.name}\n' \
@@ -65,7 +70,11 @@ class Lecturer(Mentor):
         for course in self.grades_for_lectures:
             sum_grades += len(self.grades_for_lectures[course])
 
-        self.average_rating = sum(map(sum, self.grades_for_lectures.values())) / sum_grades
+        try:
+            self.average_rating = sum(map(sum, self.grades_for_lectures.values())) / sum_grades
+        except ZeroDivisionError:
+            print(f'У {self.name}{self.surname} пока нет оценок')
+
         res = f'Имя: {self.name}\nФамилия: {self.surname}\n' \
             f'Средняя оценка за лекции: {self.average_rating}'
 
@@ -97,7 +106,7 @@ class Reviewer(Mentor):
     def __str__(self):
         res = f'Имя: {self.name}\nФЙамилия: {self.surname}'
         return res
-    
+
 
 def average_grade_all_studenst(courses):
         sum_total = 0

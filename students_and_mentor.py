@@ -31,8 +31,6 @@ class Student:
         except ZeroDivisionError:
             print(f'У {self.name}{self.surname} пока нет оценок')
 
-        self.average_rating = sum(map(sum, self.grades.values())) / sum_grades
-
         res = f'Имя: {self.name}\n' \
               f'Фамилия: {self.surname}\n' \
               f'Средняя оценка за домашнее задание: {self.average_rating}\n' \
